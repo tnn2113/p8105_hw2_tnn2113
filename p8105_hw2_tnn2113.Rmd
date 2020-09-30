@@ -1,0 +1,81 @@
+---
+title: "Homework 1"
+author: Tu  Nguyen
+output: github_document
+---
+
+This is my solution to HW1.
+
+
+```{r, message = FALSE}
+library(tidyverse)
+```
+
+## Problem 1
+
+Create a data frame with the specified elements.
+```{r}
+prob1_df = 
+  tibble(
+    samp = rnorm(10),
+    samp_gt_0 = samp > 0,
+    char_vec = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"),
+    factor_vec = factor(c("low", "low", "low", "mod", "mod", "mod", "mod", "high", "high", "high"))
+)
+```
+
+Take the mean of each variable in my data frame. 
+
+```{r}
+mean(pull(prob1_df, samp))
+mean(pull(prob1_df, samp_gt_0))
+mean(pull(prob1_df, char_vec))
+mean(pull(prob1_df, factor_vec))
+```
+I can take the mean of numbers and logical but not character or factor. 
+
+```{r}
+as.numeric(pull(prob1_df, samp))
+as.numeric(pull(prob1_df, samp_gt_0))
+as.numeric(pull(prob1_df, char_vec))
+as.numeric(pull(prob1_df, factor_vec))
+```
+
+
+```{r}
+as.numeric(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp_gt_0)
+as.numeric(pull(prob1_df, samp_gt_0)) * pull(prob1_df, samp)
+```
+
+
+## Problem 2
+
+Load the *penguins* dataset
+
+```{r}
+data("penguins", package = "palmerpenguins")
+```
+
+
+* Penguins dataset contains a collection of variables in the columns and characteristics of each variable (species, island, body mass, sex, length, depth)
+
+* The penguins data frame has *`r nrow(penguins)`* *rows* and *`r ncol(penguins)`* *columns*. 
+
+* The *mean* of the flipper length of penguins dataset is *`r mean(penguins)`*. 
+
+
+This code chunk below generates a scatterplot and save it.
+
+```{r flipper_length and bill_length plot}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+
+ggsave("scatter_plot_penguins.pdf", height = 5, width = 5)
+```
+The plot shows different of values of *flipper length* and *bill length* of Adelie, Chinstrap, and Gentoo species. 
+
+
+
+
+
+
+
