@@ -4,7 +4,7 @@ author: Tu  Nguyen
 output: github_document
 ---
 
-This is my solution to HW1.
+This is my solution to HW2.
 
 
 ```{r, message = FALSE}
@@ -53,3 +53,13 @@ subway_no_vending_distinct = distinct(subway_no_vending, line, station_name, ven
 ```
 Proportion of station entrances/exits without vending allowance is `r nrow(subway_no_vending_distinct)`. 
 
+
+```{r}
+subway_reformat = 
+  gather(subway_data_tidy, `route1`:`route11`, key = "route", value = "subway_line") %>% 
+  select(-route)
+
+A_line = filter(subway_reformat, subway_line == "A")
+A_line_compliant = filter(A_line, ada == "TRUE")
+```
+There are `r nrow(A_line)` distinct stations serve the A train, in which `r nrow(A_line_compliant)` are ADA compliant. 
