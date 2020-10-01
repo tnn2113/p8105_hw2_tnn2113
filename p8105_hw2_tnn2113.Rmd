@@ -69,6 +69,11 @@ There are `r nrow(A_line)` distinct stations serve the A train, in which `r nrow
 Read in pols month dataset. 
 
 ```{r}
+library(lubridate)
+```
+
+
+```{r}
 poll = 
   read_csv("./data/fivethirtyeight_datasets/pols-month.csv") %>% 
   separate(mon, into = c("year", "month", "day"), sep = "-") %>% 
@@ -80,6 +85,26 @@ poll =
   ) %>% 
   select(-c(prez, day))
 ```
+
+Read in snp dataset
+
+```{r}
+standard_and_poor = 
+  read_csv("./data/fivethirtyeight_datasets/snp.csv") %>% 
+  janitor::clean_names()
+```
+
+Separate date
+
+```{r}
+standard_and_poor$date = as.Date(standard_and_poor$date, "%m/%d/%Y")
+```
+
+```{r}
+standard_and_poor %>% 
+  separate(date, into = c("year", "month", "day"), sep = "-")
+```
+
 
 
 
