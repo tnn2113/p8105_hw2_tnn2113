@@ -64,6 +64,7 @@ A_line_compliant = filter(A_line, ada == "TRUE")
 ```
 There are `r nrow(A_line)` distinct stations serve the A train, in which `r nrow(A_line_compliant)` are ADA compliant. 
 
+
 ## Problem 3
 
 Read in pols month dataset. 
@@ -120,7 +121,12 @@ unemployment_data =
 ```
 
 
+Join snp into pols
 
+```{r}
+fas_df = 
+  left_join(new_snp, poll, by = c("year", "month"))
+```
 
 
 
