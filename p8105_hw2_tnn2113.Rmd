@@ -94,17 +94,30 @@ standard_and_poor =
   janitor::clean_names()
 ```
 
-Separate date
+Separate date in snp dataset
 
 ```{r}
 standard_and_poor$date = as.Date(standard_and_poor$date, "%m/%d/%Y")
 ```
 
 ```{r}
-standard_and_poor %>% 
+new_snp = 
+  standard_and_poor %>% 
   separate(date, into = c("year", "month", "day"), sep = "-")
 ```
 
+Clean unemployment dataset
+
+```{r}
+unemployment_data = 
+  read_csv("./data/fivethirtyeight_datasets/unemployment.csv") %>% 
+  janitor::clean_names() %>% 
+  pivot_longer(
+    jan:dec,
+    names_to = "month",
+    values_to = "number_of_unemployment"
+  )
+```
 
 
 
